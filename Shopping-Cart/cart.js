@@ -15,6 +15,12 @@ const addEventsListener = () => {
     //Remove courses from the cart
     cart.addEventListener('click', deleteCourse);
 
+    //Show the courses from localStorage
+    document.addEventListener('DOMContentLoaded', () => {
+        cartArticles = JSON.parse(localStorage.getItem('carrito')) || []
+        addToCart()
+    })
+
     //Clean the cart
 
     cleanCart.addEventListener('click', () => {
@@ -108,6 +114,14 @@ const addToCart = () => {
         //Add cart HTML to tbody
         cartContainer.appendChild(row);
     })
+
+    //Add shopping cart to Storage
+    storageSynchronize()
+}
+
+//Function that add the cart to the LocalStorage
+function storageSynchronize() {
+    localStorage.setItem('carrito', JSON.stringify(cartArticles))
 }
 
 //Function that remove courses from the tbody
